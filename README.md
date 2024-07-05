@@ -11,6 +11,7 @@ This Shopify project includes a custom section called "Veterinarian Approval." T
 ## Getting Started
 ```
 git clone https://github.com/aaronGeb/theme-dev.git
+cd theme-dev
 ```
 
 ## Installation
