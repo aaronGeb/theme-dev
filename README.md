@@ -16,6 +16,12 @@ cd theme-dev
 
 ## Installation
 
+```
+shopify login --store your-store-name.myshopify.com
+shopify theme pull --store your-store-name.myshopify.com
+shopify theme serve
+```
+
 
 
 ## License
