@@ -29,7 +29,6 @@
       "options": [
         { "value": "left", "label": "Left" },
         { "value": "right", "label": "Right" }
-        
       ],
       "default": "left"
     },
@@ -72,42 +71,17 @@
   ]
 }
 {% endschema %}
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous" defer></script>
-<script type="text/javascript">
-
-  $(document).ready(function () {
-    $(this).keydown(function (e) {
-      var img = $(".vet-approval-section .badge-image");
-
-      switch (e.which) {
-        case 37: // left arrow key
-          img.removeClass('right').addClass('left');
-          break;
-        case 38: // up arrow key
-          img.removeClass('bottom').addClass('top');
-          break;
-        case 39: // right arrow key
-          img.removeClass('left').addClass('right');
-          break;
-        case 40: // down arrow key
-          img.removeClass('top').addClass('bottom');
-          break;
-        default:
-          return;
-      }
-      e.preventDefault();
-    });
-  });
-</script>
-
+<script scr="../assets/main.js.liquid" defer></script>
 
 <div class="vet-approval-section">
   <div class="image-container">
     {% if section.settings.main_image %}
-      <img src="{{'../assets/pexels-mikhail-nilov-7469222.jpg' | asset_url }}" alt="Main Image" class="main-image" width="600" height="400">
+      <img src="{{ section.settings.main_image | image_url }}" alt="Main Image" class="main-image" width="600" height="400">
     {% endif %}
     {% if section.settings.badge_image %}
-      <img src="{{'../assets/DALLE.png'| asset_url }}" alt="Badge Image" class="badge-image {{ section.settings.badge_position_LR}} {{section.settings.badge_position_TB }}" width="100" height="100">
+      <img src="{{ section.settings.badge_image | image_url }}" alt="Badge Image" class="badge-image {{ section.settings.badge_position_LR }} {{ section.settings.badge_position_TB }}" width="100" height="100">
     {% endif %}
   </div>
   <div class="text-container">
@@ -158,7 +132,6 @@
 }
 
 .badge-image.left {
-  
   left: 10px;
 }
 
@@ -193,5 +166,47 @@
 
 .custom-button:hover {
   background-color: #333;
+}
+
+/* Mobile view */
+@media (max-width: 767px) {
+  .vet-approval-section {
+    max-width: 100%;
+    padding: 10px;
+  }
+}
+
+/* Desktop view */
+@media (min-width: 768px) {
+  .vet-approval-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+    max-width: 1000px;
+  }
+
+  .image-container, .text-container {
+    flex: 1;
+    margin: 0 20px;
+  }
+
+  .image-container {
+    flex-basis: 40%;
+  }
+
+  .text-container {
+    flex-basis: 60%;
+  }
+
+  .main-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .badge-image {
+    width: 80px;
+    height: 80px;
+  }
 }
 </style>
