@@ -1,0 +1,30 @@
+/*
+An event listener for keydown events on the document. 
+When a key is pressed, it checks which arrow key 
+was pressed (left, up, right, or down) based on the `e.which` value.
+Depending on the arrow key pressed, it adds or 
+removes classes to the `.badge-image` element within the `.vet-approval-section`.
+  */
+$(document).ready(function () {
+  $(this).keydown(function (e) {
+    var img = $(".vet-approval-section .badge-image");
+
+    switch (e.which) {
+      case 37: // left arrow key
+        img.removeClass('right').addClass('left');
+        break;
+      case 38: // up arrow key
+        img.removeClass('bottom').addClass('top');
+        break;
+      case 39: // right arrow key
+        img.removeClass('left').addClass('right');
+        break;
+      case 40: // down arrow key
+        img.removeClass('top').addClass('bottom');
+        break;
+      default:
+        return;
+    }
+    e.preventDefault();
+  });
+});

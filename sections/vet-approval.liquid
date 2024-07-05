@@ -1,0 +1,197 @@
+{% schema %}
+{
+  "name": "Veterinarian Approval",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_image",
+      "label": "Badge Image"
+    },
+    {
+      "type": "select",
+      "id": "badge_position_TB",
+      "label": "Badge Position 1",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "select",
+      "id": "badge_position_LR",
+      "label": "Badge Position 2",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+        
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Doctor's Name Headline",
+      "default": "Dr. Ernie Sanderson"
+    },
+    {
+      "type": "text",
+      "id": "sub_headline",
+      "label": "Sub Headline",
+      "default": "Veterinarian-Approved"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "All products from Dr. Ernie's are vetted and approved by a qualified veterinarian, ensuring top-quality care for your pet."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "View Products"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL",
+      "default": "/collections"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Veterinarian Approval",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous" defer></script>
+<script type="text/javascript">
+
+  $(document).ready(function () {
+    $(this).keydown(function (e) {
+      var img = $(".vet-approval-section .badge-image");
+
+      switch (e.which) {
+        case 37: // left arrow key
+          img.removeClass('right').addClass('left');
+          break;
+        case 38: // up arrow key
+          img.removeClass('bottom').addClass('top');
+          break;
+        case 39: // right arrow key
+          img.removeClass('left').addClass('right');
+          break;
+        case 40: // down arrow key
+          img.removeClass('top').addClass('bottom');
+          break;
+        default:
+          return;
+      }
+      e.preventDefault();
+    });
+  });
+</script>
+
+
+<div class="vet-approval-section">
+  <div class="image-container">
+    {% if section.settings.main_image %}
+      <img src="{{'../assets/pexels-mikhail-nilov-7469222.jpg' | asset_url }}" alt="Main Image" class="main-image" width="600" height="400">
+    {% endif %}
+    {% if section.settings.badge_image %}
+      <img src="{{'../assets/DALLE.png'| asset_url }}" alt="Badge Image" class="badge-image {{ section.settings.badge_position_LR}} {{section.settings.badge_position_TB }}" width="100" height="100">
+    {% endif %}
+  </div>
+  <div class="text-container">
+    <h3>{{ section.settings.headline }}</h3>
+    <h2>{{ section.settings.sub_headline }}</h2>
+    <p>{{ section.settings.description }}</p>
+    <a href="{{ section.settings.button_url }}" class="custom-button">{{ section.settings.button_text }}</a>
+  </div>
+</div>
+
+<style>
+.vet-approval-section {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+  background-color: #fff;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.image-container {
+  position: relative;
+}
+
+.main-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.badge-image {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+}
+
+.badge-image.top {
+  top: 10px;
+}
+
+.badge-image.right {
+  right: 10px;
+}
+
+.badge-image.bottom {
+  bottom: 10px;
+}
+
+.badge-image.left {
+  
+  left: 10px;
+}
+
+.text-container {
+  margin-top: 20px;
+}
+
+.text-container h3 {
+  margin: 0;
+  color: #f7941d;
+}
+
+.text-container h2 {
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.text-container p {
+  margin: 10px 0;
+  color: #666;
+}
+
+.custom-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.custom-button:hover {
+  background-color: #333;
+}
+</style>
